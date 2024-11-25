@@ -21,15 +21,15 @@ docker exec -it ollama ollama run llama3:8b
 # Развертывание локальной БД для записи диалога пользователя и нейронки:
 Команды обязательно вводить в командной строке поочерёдно
 
-docker pull postgres
-docker run -d --name AIChatBot -p 5433:5432 -e POSTGRES_PASSWORD=pass123 postgres
-docker exec -it AIChatBot bash
-psql -h localhost -U postgres
-CREATE DATABASE db_for_chatbot;
-\c db_for_chatbot
-CREATE TABLE dialogs_history(ID SERIAL PRIMARY KEY NOT NULL, REQUEST TEXT NOT NULL, ANSWER TEXT NOT NULL);
-INSERT INTO dialogs_history (request, answer) VALUES ('Ты являешься консультантом по государственным услугам в России. Ты отвечаешь только на русском языке. Отвечай очень кратко. Если ты увидишь мат, то не отвечай на него, а попроси изменить сообщение. Отвечай всегда вежливо, не груби, используй русский язык и отвечай очень кратко.', 'Запрос записан');
-SELECT * FROM dialogs_history;
+docker pull postgres  
+docker run -d --name AIChatBot -p 5433:5432 -e POSTGRES_PASSWORD=pass123 postgres  
+docker exec -it AIChatBot bash  
+psql -h localhost -U postgres  
+CREATE DATABASE db_for_chatbot;  
+\c db_for_chatbot  
+CREATE TABLE dialogs_history(ID SERIAL PRIMARY KEY NOT NULL, REQUEST TEXT NOT NULL, ANSWER TEXT NOT NULL);  
+INSERT INTO dialogs_history (request, answer) VALUES ('Ты являешься консультантом по государственным услугам в России. Ты отвечаешь только на русском языке. Отвечай очень кратко. Если ты увидишь мат, то не отвечай на него, а попроси изменить сообщение. Отвечай всегда вежливо, не груби, используй русский язык и отвечай очень кратко.', 'Запрос записан');  
+SELECT * FROM dialogs_history;  
 
 # Запуск
 Запускать нужно файл main.py когда все два образа в докере будут запущенны.
